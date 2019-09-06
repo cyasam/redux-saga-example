@@ -1,22 +1,43 @@
-import React from "react";
-import Loader from "./Loader";
+import React from 'react';
+import { connect } from 'react-redux';
 
-const TodoList = props => {
-  return (
-    <>
-      <h1>Todos</h1>
+import { fetchTodoListStart } from '../redux/todos/todos.sagas';
+class TodoList extends React.Component {
+  componentDidMount() {
+    this.props.fetchTodoList();
+  }
+  render() {
+    const { loading, error, data } = this.props;
+    if (loading) {
+      return <p>Loadingggggg...</p>;
+    }
 
-      {!props.data ? (
-        <p>No Data Found</p>
-      ) : (
-        <ul>
-          {props.data.map(todo => (
-            <li key={todo.id}>{todo.title}</li>
-          ))}
-        </ul>
-      )}
-    </>
-  );
-};
+    if (error) {
+      return <p>{error.message}</p>;
+    }
+    return (
+      <>
+        <h1>Todos</h1>
 
-export default Loader(TodoList);
+        {!data ? (
+          <p>No Data Found</p>
+        ) : (
+          <ul>
+            {data.map(todo => (
+              <li key={todo.id}>{todo.title}</li>
+            ))}
+          </ul>
+        )}
+      </>
+    );
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  fetchTodoList: () => dispatch(fetchTodoListStart()),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(TodoList);

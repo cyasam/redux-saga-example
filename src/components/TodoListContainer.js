@@ -1,10 +1,10 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
 
-import { fetchTodoListStart } from "../redux/todos/todos.sagas";
-import TodoList from "./TodoList";
+import { fetchTodoListStart } from '../redux/todos/todos.sagas';
+import TodoList from './TodoList';
 
-const TodoListContainer = WrappedComponent => {
+const TodoListWrapper = WrappedComponent => {
   return class extends React.Component {
     componentDidMount() {
       this.props.fetchTodoList();
@@ -25,10 +25,10 @@ const TodoListContainer = WrappedComponent => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchTodoList: () => dispatch(fetchTodoListStart())
+  fetchTodoList: () => dispatch(fetchTodoListStart()),
 });
 
 export default connect(
   null,
-  mapDispatchToProps
-)(TodoListContainer(TodoList));
+  mapDispatchToProps,
+)(TodoList);

@@ -1,11 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 
-import "./styles.css";
+import './styles.css';
 
-import store from "./redux/store";
-import TodoListContainer from "./components/TodoListContainer";
+import store from './redux/store';
+import TodoList from './components/TodoList';
 
 function App() {
   return (
@@ -13,11 +13,11 @@ function App() {
       <div className="App">
         <h1>Hello CodeSandbox</h1>
         <h2>Start editing to see some magic happen!</h2>
-        <TodoListContainer />
+        <TodoList />
       </div>
     </Provider>
   );
 }
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
